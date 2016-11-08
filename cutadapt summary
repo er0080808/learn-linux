@@ -1,0 +1,62 @@
+https://cutadapt.readthedocs.io/en/stable/guide.html
+
+#Read modification order
+
+    Unconditional base removal with --cut
+    Quality trimming (-q)
+    Adapter trimming (-a, -b, -g and uppercase versions)
+    N-end trimming (--trim-n)
+    Length tag modification (--length-tag)
+    Read name suffixe removal (--strip-suffix)
+    Addition of prefix and suffix to read name (-x/--prefix and -y/--suffix)
+    Double-encode the sequence (only colorspace)
+    Replace negative quality values with zero (zero capping, only colorspace)
+    Trim primer base (only colorspace)
+    #The last three steps are colorspace-specific.
+
+#Quality trimming
+cutadapt -q 15,10 -o output.fastq input.fastq
+
+#Filtering reads
+ 
+--minimum-length N or -m N
+    Throw away processed reads shorter than N bases.
+--too-short-output FILE
+    Instead of throwing away the reads that are too short according to -m, write them to FILE (in FASTA/FASTQ format).
+--maximum-length N or -M N
+    Throw away processed reads longer than N bases.
+--too-long-output FILE
+    Instead of throwing away the reads that are too long (according to -M), write them to FILE (in FASTA/FASTQ format).
+--untrimmed-output FILE
+    Write all reads without adapters to FILE (in FASTA/FASTQ format) instead of writing them to the regular output file.
+--discard-trimmed
+    Throw away reads in which an adapter was found.
+--discard-untrimmed
+    Throw away reads in which no adapter was found. This has the same effect as specifying --untrimmed-output /dev/null.
+
+   The options --too-short-output and --too-long-output are applied first. This means, for example, that a read that is too long will never end up in the --untrimmed-output file when --too-long-output was given, no matter whether it was trimmed or not.
+   The options --untrimmed-output, --discard-trimmed and -discard-untrimmed are mutually exclusive.
+
+#Dealing with N bases
+--max-n COUNT
+    Discard reads containing more than COUNT N bases. A fractional COUNT between 0 and 1 can also be given and will be treated as the proportion of maximally allowed N bases in the read.
+--trim-n
+    Remove flanking N bases from each read.
+
+
+#Standard input and output
+cutadapt -a AACCGGTT input.fastq > output.fastq
+#Compressed files
+cutadapt -a AACCGGTT -o output.fastq.gz input.fastq.gz
+
+#Cutadapt supports trimming of multiple types of adapters:
+Adapter type 	Command-line option
+3’ adapter 	-a ADAPTER
+5’ adapter 	-g ADAPTER
+Anchored 3’ adapter 	-a ADAPTER$
+Anchored 5’ adapter 	-g ^ADAPTER
+5’ or 3’ (both possible) 	-b ADAPTER
+Linked adapter 	-a ADAPTER1...ADAPTER2
+
+
+
