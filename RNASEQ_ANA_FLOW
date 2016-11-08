@@ -1,0 +1,35 @@
+#A very useful website
+http://rnaseq.uoregon.edu/#analysis
+
+#example of fastx-toolkit
+#https://sites.psu.edu/yuka/2014/11/13/small-rna-seq-analysis/
+
+fastq_quality_filter -Q33 -q 20 -p 80 -i test.fastq | fastq_quality_trimmer -Q33 -t 20 -l 10 -o test_filtered.fastq 
+#filtering poor quality reads
+
+fastq_to_fasta -r -n -Q33 -i test_filtered.fastq -o test.fa 
+#convert to multi-fasta format
+
+fastx_clipper -a TGGAATTCTCGGGTGCCAAGGAACTCCAGTCAC -l 18 -i test.fa -o test_clipped.fa 
+#clip adapter
+
+#read count from mirAnalyzer to be analyzed for differential expression by DESeq
+
+
+
+
+Modified version (as of Feb 5, 2016)
+
+#filtering bad quality reads
+for file in *.fastq; do filename=`echo $file | cut -d “.” -f 1`; fastq_quality_filter -Q33 -q 20 -p 80 -i $file | fastq_quality_trimmer -Q33 -t 20 -l 10 -o ${filename}_filtered.fastq; done
+
+#clip adapter (BioO)
+for file in *_filtered.fastq; do filename=`echo $file | cut -d “.” -f 1`; fastx_clipper -Q33 -a TGGAATTCTCGGGTGCCAAGG -l 18 -i $file -o ${filename}_clipped.fastq; done
+
+#clip 4 bases from 3’ end (BioO introduced random 4 bases in its both adapters)
+for file in *_filtered_clipped.fastq; do filename=`echo $file | cut -d “.” -f 1`; fastx_trimmer -Q33 -t 4 -i $file -o ${filename}_trimmed.fastq; done
+
+#clip 4 bases from 5’ end(BioO introduced random 4 bases in its both adapters)
+for file in *_filtered_clipped_trimmed.fastq; do filename=`echo $file | cut -d “.” -f 1`; fastx_trimmer -Q33 -f 4 -z -i $file -o ${filename}2.fastq.gz; done
+
+#load *_filtered_clipped_trimmed2.fastq.gz to sRNAbench within ​sRNAtoolbox(​http://bioinfo5.ugr.es/srnatoolbox​)
