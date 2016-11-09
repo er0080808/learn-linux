@@ -1,0 +1,103 @@
+http://www.yaolibio.com/2016/09/01/retrieve-genome-data-from-ucsc/
+
+这是初试生信系列心得中的另外一章，这章主要是总结基因组序列及相关注释文件的获取方法。对于NGS的序列分析来说，如果没有reference genome和genome annotation下游的分析可能根本无法进行。
+
+UCSC提供的数据分为sequence和annotation两大类，对于人、小鼠在内的71种脊椎动物，可以从UCSC同时下载sequence和annotation，其他的一般只有sequence。
+基因组的版本
+
+不同的生物信息学数据库对于基因组的命名方式各不相同。以人为例，NCBI/ENSEMBL用GRCh系列命名，而UCSC则使用hg系列命名。这两套命名系统背后的版本对应关系如下：
+UCSC 	NCBI
+hg18 	GRCh36
+hg19 	GRCh37
+hg38 	GRCh38
+
+hg系列和GRCh系列主要的差别有两处：
+
+    hg系列的染色体命名是”chr”+染色体号，而GRCh系列的染色体没有前缀的”chr”；
+    hg系列序列是0-based（第一个核苷酸记0），GRCh系列是1-based（第一个核苷酸记1，两种计数方法的区别参见《基因组的坐标系统》）。
+
+从FTP站点获取
+获取sequence
+
+UCSC的reference genome是分染色体保存的，对于hg38来说，单个的染色体序列可以在http://hgdownload.soe.ucsc.edu/goldenPath/hg38/chromosomes/下载，所有染色体打包好的文件在http://hgdownload.soe.ucsc.edu/goldenPath/hg38/bigZips/hg38.chromFa.tar.gz下载。如果需要下载其他版本（19/18），可以把上述链接中的hg38换成hg19/hg18。如果需要将所有的染色体序列合并到一个文件中，可以在下载完成后依次执行下列命令（POSIX compatible）：
+tar –xzvf hg38.chromFa.tar.gz
+cd hg38
+cat *.fa &gt; hg38.fa
+1
+2
+3
+	
+tar –xzvf hg38.chromFa.tar.gz
+cd hg38
+cat *.fa > hg38.fa
+
+获取注释
+
+UCSC提供了SNP、RepeatMask、refSeq、GENCODE等注释文件。但是在UCSC的FTP站点（http://hgdownload.soe.ucsc.edu/goldenPath/hg38/database）上，这些数据被分成了两个文件——一个是.sql结尾的SQL语句文件，描述了数据表的结构和创建数据表的方法；另一个是.txt.gz结尾的数据文件。我们可以通过.sql文件来查看表的结构，再把.txt.gz格式的文件解压后转换成所需要的格式。下面是将.txt.gz的数据文件转换成gtf格式的三个例子：
+RepeatMask
+
+gunzip rmsk.txt.gz
+gawk 'OFS="\t"{print $6,"rmsk ",$12,$7+1,$8,".",$10,"."," repName \""$11"\"; repFamily \""$13"\";"}' rmsk.txt &gt; rmsk.gtf
+1
+2
+	
+gunzip rmsk.txt.gz
+gawk 'OFS="\t"{print $6,"rmsk ",$12,$7+1,$8,".",$10,"."," repName \""$11"\"; repFamily \""$13"\";"}' rmsk.txt &gt; rmsk.gtf
+
+simpleRepeat
+
+gunzip simpleRepeat.txt.gz
+gawk 'OFS="\t"{print $2," simpleRepeat","trf",$3+1,$4,".","+",".","name \""$5"\"; sequence \""$17"\";"}' simpleRepeat.txt &gt; simpleRepeat.gtf
+1
+2
+	
+gunzip simpleRepeat.txt.gz
+gawk 'OFS="\t"{print $2," simpleRepeat","trf",$3+1,$4,".","+",".","name \""$5"\"; sequence \""$17"\";"}' simpleRepeat.txt &gt; simpleRepeat.gtf
+
+RefSeq
+
+UCSC为RefSeq和GENCODE等以genePred形式保存的注释文件提供了专门的格式转换程序——genePredToBed、genePredToGenePred、genePredToFakePsl、genePredToGtf、genePredToMafFrames（各自的使用方法参见http://hgdownload.soe.ucsc.edu/admin/exe/linux.x86_64/FOOTER）。若需将RefSeq转存为gtf格式，可参考下列命令：
+gunzip refGene.txt.gz
+cut -f 2- refGene.txt | genePredToGtf -utr -source=hg38 file stdin refGene.gtf
+1
+2
+	
+gunzip refGene.txt.gz
+cut -f 2- refGene.txt | genePredToGtf -utr -source=hg38 file stdin refGene.gtf
+
+从Table Browser获取
+
+针对annotation，UCSC还通过Table Browser页面（http://genome.ucsc.edu/cgi-bin/hgTables）提供了一个更加友好的获取方法。Table Browser的使用基本使用方法可以参考http://genome.ucsc.edu/goldenPath/help/hgTablesHelp.html#GettingStarted。为了避免和官方帮助文档的重叠，我仅在这里分享在做REP项目过程中发现的几种比较tricky的用法。
+获取GENCODE转录本ID和Gene Symbol的映射
+
+    clade设置为”Mammal”, genome设置为”Human”，assembly设置为”Dec. 2013 (GRCh38/hg38)”；
+    将group设置为”Genes and Gene Predictions”，track设置为”All GENCODE V24”；
+    Table设置为”Basic (wgEncodeGencodeBasicV24)”；
+    Output format设置为”selected fields from primary and related tables”；
+    点击”get output”；
+    在新页面中勾选”name”和”name2”前的复选框；
+    点击”get output”即可；
+
+获取5’UTR/3’ UTR/Coding Exons/Intron的BED文件
+
+    clade设置为”Mammal”, genome设置为”Human”，assembly设置为”Dec. 2013 (GRCh38/hg38)”；
+    将group设置为”Genes and Gene Predictions”，track设置为”All GENCODE V24”；
+    Table设置为”Basic (wgEncodeGencodeBasicV24)”；
+    Output format设置为”BED – browser extensible data”；
+    点击”get output”；
+    在新页面中勾选自己需要的elements；
+    点击”get BED”即可。
+
+获取指定范围的序列
+
+UCSC可以通过使用符合自己需要的注释数据，然后再获取进一步的数据。操作方法如下：
+
+    点击Table Browser的”add custom tracks”按钮
+    在”Paste URLs or data”中添加数据的地址或者使用旁边的文件上传框上传文件（常用Bed格式或者GTF格式），然后点击”Submit”
+    在新页面中点击”go”
+    然后会跳回Table Browser，这个时候将Output format设置成”sequence”，再点击”get output”即可获取指定范围内的序列。
+
+Table Browser使用过程中可能会遇到的问题
+
+    由于抽取数据脚本执行超时（>10min）或者下载地的网络不佳，下载下来的文件可能会不完整；
+    获取3’ UTR等序列时，若直接将track指定为系统自带的annotation，会有概率出现序列的start与annotation中不符的情况（0-based和1-based的杂合），建议先下载BED文件，然后通过前述的“获取指定范围的序列”来下载序列。
