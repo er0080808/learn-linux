@@ -1,0 +1,98 @@
+http://blog.sciencenet.cn/blog-442719-864331.html
+
+Structural RNAs: A. Ribosomal RNA analysis
+
+ SILVA rRNA database project (Max Planck Institute for Marine Microbiology, Bremen, Germany ) - provides comprehensive, quality checked and regularly updated datasets of aligned small (16S/18S, SSU) and large subunit (23S/28S, LSU) ribosomal RNA (rRNA) sequences for all three domains of life (Bacteria, Archaea and Eukarya).
+
+ RNAmmer 1.2 - predicts 5s/8s, 16s/18s, and 23s/28s ribosomal RNA in full genome sequences (Reference: Lagesen, K et al. 2007. Nucl. Acids Res. 35: 3100-3108)
+
+ The Ribosomal Database Project (RDP(Michigan State University Centre for Microbial Ecology, U.S.A.). - provides ribosome related data and services, including online data analysis and aligned and annotated Bacterial and Archaeal small-subunit 16S rRNA sequences.A tutorial is providedhere.
+
+ Ridom - Ribosomal RNA analysis for clinically relevant bacteria - (University of Würzburg, Germany)
+ Rifle - (Universitat Bielefeld, Germany) The RIFLE system compares restriction patterns of 16S rDNA amplicons against a database of theoretical restriction patterns generated from a 16S rDNA database
+
+B. Transfer RNAs (tRNA)
+
+ tRNAs: tRNAscan-SE- (Univerisity of California at San Diego, U.S.A,) is incredibly sensitive & also provides secondary structure  diagrams of the tRNA molecules. It can also be accessed here or here . Alternatively use ARAGORN   (Reference: Laslett, D. & Canback. 2004. Nucleic Acids Research 32:11-16) or FindtRNA - (D. Paul & Md. Aftabuddin, West Bengal University of Technology, India) - identifies tRNA genes without introns or with introns at canonical or non-canonical positions.
+
+ ARWEN - is a program to detect tRNAs in metazoan mitochondrial DNA sequences (Reference: D. Laslett & B. Canbäck B. 2008. Bioinformatics 24:172-175)
+
+ Rfam - The Rfam database is a collection of RNA families, each represented by multiple sequence alignments, consensus secondary structures and covariance models (Reference: Gardner, P.P. et al. 2008. Nucl. Acids Res. 37, Database issue D136-D140)
+
+ TFAM - unlike other tRNA gene-finders, TFAM uses information from the total sequences of tRNAs and not just their anticodons to predict their function. Therefore TFAM has an advantage in predicting initiator tRNAs, the amino acid charging identity of nonstandard tRNAs such as suppressors, and the former identity of pseudo-tRNAs. New TFAM models are available including a proteobacterial model for the bacterial lysylated isoleucine tRNAs, making it now possible for TFAM to correctly classify all tRNA genes for some bacterial taxa.(Reference: H.Tåquist et al. 2007. Nucleic Acids Res. 35 (suppl 2): W350-W353).
+
+ tmRNAs:  BRUCE - detects transfer-messenger RNAs which function to free ribosome-stalled mRNAs. (Reference: Laslett, D., et al. 2002.  Nucleic Acids Res. 30: 3449-3453, 2002) .
+
+C. Micro RNAs  (miRNAs) are small, non-coding RNA (~20-22 nucleotides) that negatively regulate gene expression at post-transcriptional level.
+
+ mirTools - users can: (i) filter low-quality reads and 3/5' adapters from raw sequenced data; (ii) align large-scale short reads to the reference genome and explore their length distribution; (iii) classify small RNA candidates into known categories, such as known miRNAs, non-coding RNA, genomic repeats and coding sequences; (iv) provide detailed annotation information for known miRNAs, such as miRNA/miRNA*, absolute/relative reads count and the most abundant tag; (v) predict novel miRNAs that have not been characterized before; and (vi) identify differentially expressed miRNAs between samples based on two different counting strategies.(Reference: Zhu, E.L. et al. 2010. Nucl. Acids Res. 38 (suppl 2): W392-W397).
+
+ MiRPara - is a SVM-based software tool for prediction of most probable microRNA coding regions in genome scale sequences (Reference: Wu Y.et al. 2011. BMC Bioinformatics. 12(1):107).
+
+ miR-BAG predict miRNAs from the genomic sequences as well as from Next Generation Sequencing data. It applies a bootstrap aggregating approach to create an ensemble of three different approaches (naïve Bayes, Best First Decision tree and SVM) to achieve a high accuracy. At present miR-BAG includes 6 different species, 4 for animals (Homo sapiens, Canis familiaris, Mus musculus, Rattus norvegicus) alongwith one nematode (Caenorhabditis elegans) and one insect species (Drosophila melanogaster). miR-BAG was found to perform consistently with accuracy level higher than 90% for several species.(Reference: Jha, A. et al. 2012. PLoS ONE 7(9): e45782.)
+
+ Small nucleolar RNAs (snoRNAs) - can be detected with Snoscan for methylation-guide for snoRNAs and snoGPS for pseudouridylation-guide snoRNAs (Reference: P. Schattner et al. 2005. Nucl. Acids Res. 33: W686-W689). Test sequences.
+
+RNA folding:
+
+ LocARNA - Multiple Alignment of RNAs - is a tool for multiple alignment of RNA molecules. LocARNA requires only RNA sequences as input and will simultaneously fold and align the input sequences. LocARNA outputs a multiple alignment together with a consensus structure. For the folding it makes use of a very realistic energy model for RNAs as it is by RNAfold of the Vienna RNA package (or Zuker's mfold). For the alignment it features RIBOSUM-like similarity scoring and realistic gap cost. (Reference: C. Smith et al. 2010. Nucl. Acids Res. 38: W373-377).
+
+
+
+ CARNA is a tool for multiple alignment of RNA molecules. CARNA requires only the RNA sequences as input and will compute base pair probability matrices and align the sequences based on their full ensembles of structures. Alternatively, you can also provide base pair probability matrices (dot plots in .ps format) or fixed structures (as annotation in the FASTA alignment) for your sequences. If you provide fixed structures, only those structures and not the entire ensemble of possible structures is aligned. In contrast to LocARNA, CARNA does not pick the most likely consensus structure, but computes the alignment that fits best to all likely structures simultaneously. Hence, CARNA is particularly useful when aligning RNAs like riboswitches, which have more than one stable structure. (Reference: A. Dragos et al. 2012. Nucleic Acids Reseach 40: W49-W53)red_bullet.gif (914 bytes) 
+           
+ FOLDALIGN - folds and aligns RNA structures (make a foldalignment) based on a lightweight energy model and sequence similarity. The current version makes pairwise fold alignments. (Reference: J. H. Havgaard et al. J. PLOS computational biology. 3:e193, 2007). 
+ For RNA folding use MFold (Michael Zuker, Rensselaer Polytechnic Institute, U.S.A.).  N.B. The data can be presented in a number of graphic formats. 
+ Vienna RNA secondary structure prediction  (University of Vienna, Austria). I have found this site useful for drawing tRNAs in cloverleaf format.
+
+ CONTRAfold is a novel secondary structure prediction method based on conditional log-linear models, a flexible class of probabilistic models which generalize upon stochastic context-free grammars by using discriminative training and feature-rich scoring. By incorporating most of the features found in typical thermodynamic models, CONTRAfold achieves the highest single sequence prediction accuracies to date, outperforming currently available probabilistic and physics-based techniques. It provides MARNA-like output couples with hairpin structures (Reference: Do, C.B. et al. 2006. Bioinformatics 22: e90-e98).
+
+  Radar (RNA Data Analysis and Research) - provides (1) constrained alignment of RNA secondary structures, and (2) prediction of the consensus structure for a set of RNA sequences. RADAR performs many important RNA mining operations, including understanding the functionality of RNA sequences, the detection of structural RNA motifs and the clustering of RNA molecules. (Reference: Khaladkar, M. et al. 2007. Nucl. Acids Res. 35: W300-W304)
+
+Pseudoknots:
+
+ Kinefold RNA/DNA folding predictions including pseudoknots and entangled helices. Provides (i) a series of low free energy structures, (ii) an online animated folding path and (iii) a programmable trajectory plot focusing on a few helices of interest to each user. (Reference: A. Xayaphoummine et al. 2005. Nucl. Acids Res. 33: W605-W6). Structure of GGGAGAUUCCGUUUUCAGUCGGGAAAAACUGAA is shown below:
+
+
+
+ pknotsRG (Universität Bielefeld, Germany) - is a series of 3 tools for folding RNA secondary structures, including the class of simple recursive pseudoknots. Unfortunately to optimally view the results one needs Microsoft.NET framework (massive) and PseudoViewer(School of Computer Science and Engineering, Inha University, Korea).
+
+ HPknotter: A Heuristic Approach for Detecting RNA H-type Pseudoknots - offers a variety of tools including pknotsRG, PNOTS and NUPACK (Reference: C.-H. Huang et al. 2005. Bioinformatics 21: 3501-3508).
+
+ RNATOPS-W - a profile based RNA structure search program that can detect RNA pseudoknots in genomes.  For input it requires a structure profile in the pasta format, and genome sequences in the fasta format.
+
+ RNAstructure - Predict a Secondary Structure Web Server - combines four separate prediction and analysis algorithms: calculating a partition function, predicting a maximum free energy (MFE) structure, finding structures with maximum expected accuracy, and pseudoknot prediction. This server takes a sequence, either RNA or DNA, and creates a highly probable, probability annotated group of secondary structures, starting with the lowest free energy structure and including others with varied probabilities of correctness.
+
+ DotKnot - pseudoknot prediction including kissing hairpins - Intramolecular kissing hairpins are a more complex and biologically important type of pseudoknot in which two hairpin loops form base pairs. They are hard to predict using free energy minimization due to high computational requirements. (Reference: Sperschneider J et al.  2011.  RNA. 17:27-38).
+
+ IPknot - IP-based prediction of RNA pseudoKNOTs. Provides services for predicting RNA secondary structures including a wide class of pseudoknots. IPknot can also predict the consensus secondary structure when a multiple alignment of RNA sequences is given. IPknot runs fast and predicts the maximum expected accuracy (MEA) structure using integer programming (IP) with threshold cut. (Reference: Satto, K.  et al. 2011. Bioinformatics 27: i85-i93.)
+
+Promoters, terminators and other regulatory elements:
+
+
+
+ Virtual Footprint - offers two types of analyses (a) Regulon Analysis - analysis of a whole prokaryotic genome with one regulator pattern and (b) Promoter analysis -  Analysis of a promoter region with several regulator patterns (Reference: R. Münch et al. 2005. Bioinformatics 2005 21: 4187-4189).
+
+ WebGeSTer - Genome Scanner for Terminators - my favourite terminator search program is finally web enabled.  Please note that if you want to analyze data from a *.gbk file you need to use  their conversion program "GenBank2GeSTer" first. A complete description of each terminator including a diagram is produced by this program.  This site linked to an extensive database of transcriptional terminators in bacterial genome (WebGeSTer DB) (Reference: Mitra A. et al. 2011.  Nucl. Acids Res. 39(Database issue):D129-35).
+
+ ARNold -  finds rho-independent terminators in nucleic acid sequences using two complementary programs, Erpin and RNAmotif. The program colors the terminator stem and loop (References: Gautheret D, Lambert A. 2001.  J Mol Biol. 313:1003–11 & Macke T. et al. 2001. Nucleic Acids Res. 29:4724–4735 ).
+
+ FindTerm (Softberry Inc.) - is one of only two tools on the internet for mapping rho-independent terminators. You might consider using the advanced feature options and minimally increase the default energy threshold to -12.0.
+ TransTermHP (A. Villegas, Public Health Agency of Canada) - an online version of TranstermHP, Reference: Kingsford, C. et al. 2007. Genome Biol. 8: R22) an updated version of TransTerm (Reference: Ermolaeva, M.D. et al. 2000. J Mol Biol301: 27-33)
+ RibEx: Riboswitch Explorer - scans <40kb DNA for potential genes (which are linked to BLASTP) and several hundred regulatory elements, including riboswitches. If you click on the "search for attenuators" it finds terminators and antiterminators. (Reference: C. Abreu-Goodger & E. Merino. 2005. Nucl. Acids Res. 33: W690-W692).
+
+siRNA:
+
+  The siDESIGN Center is an advanced, user-friendly siRNA design tool, which significantly improves the likelihood of identifying functional siRNA. One-of-a-kind options are now available to enhance target specificity and adapt siRNA designs for more sophisticated experimental design.
+
+ siRNA Design Software - compares existing design tools, including those listed above. They also attempt to improve the MPI principles and existing tools by an algorithm that can filter ineffective siRNAs. The algorithm is based on some new observations on the secondary structure. (Reference: S. M. Yiu et al. (2004) Bioinformatics 21: 144-151).
+
+ ARTS - Alignment of RNA Tertiary Structures - aligns two nucleic acid structures (RNAs or DNAs) in pdb format and detecting apriori unknown common substructures. The identified common substructures can be either large global folds or small local tertiary motifs with at least two successive base pairs. (Reference: O. Dror et al. 2005. Bioinformatics 21 (Suppl 2):ii47-ii53)
+
+ CopraRNA is a tool for sRNA target prediction. It computes whole genome predictions by combination of distinct whole genome IntaRNA predictions.
+
+ OligoWalk - calculates thermodynamic features of sense-antisense hybidization. It predicts the free energy changes  of oligonucleotides binding to a target RNA. It can be used to design efficient siRNA targeting a given mRNA sequence. (Reference: Lu, Z.J. & Mathews, D.H. 2008. Nucleic Acids Res.36:640-647)
+
+
+
+原文地址：http://molbiol-tools.ca/RNA_analysis.htm
